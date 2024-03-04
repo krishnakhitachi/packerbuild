@@ -1,0 +1,18 @@
+---
+#playbook.yml
+ - name: 'Provision Image'
+   hosts: default
+   become: true
+
+   tasks:
+   - name: Install Apache
+     apt:
+      name: apache2
+      state: present
+  
+   - name: Start Apache
+     service:
+      name: apache2
+      state: started
+      enabled: yes
+
