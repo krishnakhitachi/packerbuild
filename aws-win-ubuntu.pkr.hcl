@@ -67,6 +67,11 @@ build {
     only          = ["firstrun-windows"]
     playbook_file = "./win_playbook.yml"
     user          = "Administrator"
+    use_proxy       = false
+      extra_arguments = [
+        "-e",
+        "ansible_winrm_server_cert_validation=ignore"
+      ]
   }
 }
 
