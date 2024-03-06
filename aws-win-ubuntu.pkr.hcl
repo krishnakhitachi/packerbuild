@@ -11,10 +11,7 @@ packer {
   }
 }
 
-variable "region" {
-  type    = string
-  default = "us-east-1"
-}
+
 
 locals { timestamp = regex_replace(timestamp(), "[- TZ:]", "") }
 
@@ -34,11 +31,11 @@ source "amazon-ebs" "ubuntu" {
   ssh_username = "ubuntu"
 }
 
-source "amazon-ebs" "firstrun-windows" {
+source "amazon-ebs" "windows" {
   ami_name      = "packer-windows-demo-${local.timestamp}"
-  communicator  = "winrm"
   instance_type = "t2.micro"
-  region        = "${var.region}"
+  communicator  = "winrm"
+  region        = "us-east-1"
   source_ami_filter {
     filters = {
       name                = "Windows_Server-2022-English-Full-Base-2024.02.14"
@@ -49,29 +46,36 @@ source "amazon-ebs" "firstrun-windows" {
     owners      = ["amazon"]
   }
   user_data_file = "./bootstrap_win.txt"
-  winrm_password = "SuperS3cr3t!!!!"
   winrm_username = "Administrator"
+  winrm_password = "SuperS3cr3t!!!!"
 }
 
 build {
   name = "learn-packer"
   sources = [
-    "source.amazon-ebs.ubuntu",
-    "source.amazon-ebs.firstrun-windows"
+    "source.amazon-ebs.ubuntu"
   ]
   provisioner "ansible" {
     playbook_file = "./playbook.yml"
     user          = "ubuntu"
   }
+}
+
+build {
+  name = "learn-packer-windows"
+  sources = [
+    "source.amazon-ebs.windows"
+  ]
   provisioner "ansible" {
-    only          = ["firstrun-windows"]
     playbook_file = "./win_playbook.yml"
     user          = "Administrator"
     use_proxy       = false
-      extra_arguments = [
-        "-e",
-        "ansible_winrm_server_cert_validation=ignore"
-      ]
+     extra_arguments = [
+      "-e",
+      "ansible_winrm_server_cert_validation=ignore",
+      "-e",
+      "ansible_winrm_transport=ntlm"
+    ]
   }
 }
 
