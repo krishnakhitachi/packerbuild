@@ -74,7 +74,9 @@ build {
       "-e",
       "ansible_winrm_server_cert_validation=ignore",
       "-e",
-      "ansible_winrm_transport=ntlm"
+      "ansible_winrm_transport=ntlm",
+      "--connection", "winrm",
+      "--extra-vars", "ansible_shell_type=powershell"
     ]
   }
 }
