@@ -1,6 +1,6 @@
 ---
 - name: Installing Apache MSI
-  hosts: windows
+  hosts: all
 
   tasks:
   - name: Create directory structure
