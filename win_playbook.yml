@@ -1,6 +1,6 @@
 ---
 - name: Installing Apache MSI
-  hosts: win
+  hosts: WinRM
 
   tasks:
   - name: Create directory structure
