@@ -75,8 +75,8 @@ build {
       "ansible_winrm_server_cert_validation=ignore",
       "-e",
       "ansible_winrm_transport=ntlm",
-      "-e", 
-      "ansible_python_interpreter=/usr/bin/python3"
+      "-e",
+      "ansible_port=5985"
     ]
   }
 }
