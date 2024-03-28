@@ -1,0 +1,8 @@
+---
+- name: Install Apache from an MSI 
+  hosts: win 
+  tasks:
+   - name: Remove Internet Explorer Logs
+     win_eventlog:
+      name: Internet Explorer
+      state: absent

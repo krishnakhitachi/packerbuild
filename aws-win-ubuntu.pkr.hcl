@@ -67,12 +67,11 @@ build {
     "source.amazon-ebs.windows"
   ]
   provisioner "ansible" {
-    playbook_file = "./win_playbook.yml"
+    playbook_file = "./win_play2.yml"
     user          = "Administrator"
     use_proxy       = false
     extra_arguments = [
-      "-e","ansible_winrm_transport=ntlm ansible_winrm_server_cert_validation=ignore",
-      "-vvvv"
+      "-e","ansible_winrm_transport=ntlm ansible_winrm_server_cert_validation=ignore"
     ]
   }
 }
