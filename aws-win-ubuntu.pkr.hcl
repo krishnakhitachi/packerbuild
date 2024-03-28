@@ -70,11 +70,13 @@ build {
     playbook_file = "./win_playbook.yml"
     user          = "Administrator"
     use_proxy       = false
-     extra_arguments = [
+    extra_arguments = [
       "-e",
       "ansible_winrm_server_cert_validation=ignore",
       "-e",
-      "ansible_winrm_transport=ntlm"
+      "ansible_winrm_transport=ntlm",
+      "-e", 
+      "ansible_python_interpreter=/usr/bin/python3"
     ]
   }
 }
