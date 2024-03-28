@@ -76,7 +76,14 @@ build {
       "-e",
       "ansible_winrm_transport=ntlm",
       "-e",
-      "ansible_port=5985"
+      "ansible_port=5986",
+      "-e",
+      "ansible_user=user",
+      "-e",
+      "ansible_password=password",
+      "-e",
+      "win_password=password"
+
     ]
   }
 }
