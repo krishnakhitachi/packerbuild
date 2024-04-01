@@ -49,7 +49,7 @@ source "amazon-ebs" "windows" {
   winrm_username = "Administrator"
   winrm_password = "SuperS3cr3t!!!!"
   winrm_insecure   = true
-  winrm_use_ssl    = true
+  winrm_no_proxy = true
 }
 
 build {
