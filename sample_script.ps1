@@ -11,5 +11,3 @@ Write-Host "Likewise, VAR2 is:" $Env:VAR2
 Write-Host "VAR3 is:" $Env:VAR3
 Write-Host "Finally, VAR4 is:" $Env:VAR4
 Write-Host "None of the special characters needed escaping in the template"
-
-

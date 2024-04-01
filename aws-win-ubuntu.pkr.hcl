@@ -48,6 +48,8 @@ source "amazon-ebs" "windows" {
   user_data_file = "./bootstrap_win.txt"
   winrm_username = "Administrator"
   winrm_password = "SuperS3cr3t!!!!"
+  winrm_insecure   = true
+  winrm_use_ssl    = true
 }
 
 build {
@@ -77,7 +79,6 @@ build {
     script           = "./sample_script.ps1"
   }
   provisioner "ansible" {
-    command = "./ansible.sh"
     playbook_file = "./win_playbook.yml"
     user          = "Administrator"
     use_proxy       = false
