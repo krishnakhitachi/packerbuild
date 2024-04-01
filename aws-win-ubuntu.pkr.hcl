@@ -48,7 +48,6 @@ source "amazon-ebs" "windows" {
   user_data_file = "./bootstrap_win.txt"
   winrm_username = "Administrator"
   winrm_password = "SuperS3cr3t!!!!"
-  winrm_no_proxy = true
 }
 
 build {
@@ -82,8 +81,70 @@ build {
     user          = "Administrator"
     use_proxy       = false
     extra_arguments = [
-      "-e","ansible_winrm_transport=ntlm ansible_winrm_server_cert_validation=ignore ansible_port=5985 ansible_user=user ansible_password=password win_password=password"
+      "-e","ansible_winrm_transport=ntlm ansible_winrm_server_cert_validation=ignore"
     ]
   }
 }
 
+source "azure-arm" "server_2019" {
+  use_azure_cli_auth                               = true
+  build_resource_group_name                        = "ManagedImages-RGP"
+  build_key_vault_name                             = "Example-Packer-Keyvault"
+  os_type                                          = "Windows"
+  image_publisher                                  = "MicrosoftWindowsServer"
+  image_offer                                      = "WindowsServer"
+  image_sku                                        = "2019-Datacenter"
+  vm_size                                          = "Standard_D2as_v5"
+  os_disk_size_gb                                  = 130
+  shared_gallery_image_version_exclude_from_latest = false
+  virtual_network_resource_group_name              = "VNET-Resource-Group"
+  virtual_network_name                             = "My-VNET"
+  virtual_network_subnet_name                      = "My-Subnet"
+  private_virtual_network_with_public_ip           = false
+  communicator                                     = "winrm"
+  winrm_use_ssl                                    = true
+  winrm_insecure                                   = true
+  winrm_timeout                                    = "3m"
+  winrm_username                                   = "Packer"
+  managed_image_name                               = "Managed-Image-Name"
+  managed_image_resource_group_name                = "ManagedImages-RGP"
+  managed_image_storage_account_type               = "Standard_LRS"
+
+  shared_image_gallery_destination {
+    resource_group       = "ManagedImages-RGP"
+    gallery_name         = "MyGallery"
+    image_name           = "Server2019"
+    storage_account_type = "Standard_LRS"
+  }
+}
+
+build {
+  name = "learn-packer-windows2"
+  sources = [
+    "source.amazon-ebs.windows",
+  ]
+
+  provisioner "shell-local" {
+    inline_shebang = "/bin/bash -e"
+    inline = [
+      "pipx inject python-env-name \"pywinrm\"",
+    ]
+  }
+
+  provisioner "powershell" {
+    script = "./ConfigureRemotingForAnsible.ps1"
+  }
+
+  provisioner "ansible" {
+    skip_version_check  = false
+    user                = "Packer"
+    use_proxy           = false
+    playbook_file       = "win_playbook.yml"
+    extra_arguments = [
+      "-e",
+      "ansible_winrm_server_cert_validation=ignore",
+      "-e",
+      "ansible_winrm_transport=ntlm",
+    ]
+  }
+}

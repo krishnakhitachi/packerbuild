@@ -42,4 +42,4 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Packer Build - Branches
         if: "startsWith(github.ref, 'refs/heads/')"
-        run: packer build -only=learn-packer-windows.amazon-ebs.windows .
+        run: packer build -only=learn-packer-windows2.source.amazon-ebs.windows .
