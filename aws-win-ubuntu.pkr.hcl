@@ -77,6 +77,7 @@ build {
     script           = "./sample_script.ps1"
   }
   provisioner "ansible" {
+    command = "./ansible.sh"
     playbook_file = "./win_playbook.yml"
     user          = "Administrator"
     use_proxy       = false
