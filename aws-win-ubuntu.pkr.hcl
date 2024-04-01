@@ -38,7 +38,7 @@ source "amazon-ebs" "windows" {
   region        = "us-east-1"
   source_ami_filter {
     filters = {
-      name                = "Windows_Server-2019-English-Full-SQL_2022_Standard-2024.03.13"
+      name                = "Windows_Server-2019-English-Full-Base-2024.03.13"
       root-device-type    = "ebs"
       virtualization-type = "hvm"
     }
