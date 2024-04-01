@@ -81,7 +81,7 @@ build {
     user          = "Administrator"
     use_proxy       = false
     extra_arguments = [
-      "-e","ansible_winrm_transport=ntlm ansible_winrm_server_cert_validation=ignore"
+      "-e","ansible_winrm_transport=ntlm ansible_winrm_server_cert_validation=ignore ansible_port=5985 ansible_user=user ansible_password=password win_password=password"
     ]
   }
 }
