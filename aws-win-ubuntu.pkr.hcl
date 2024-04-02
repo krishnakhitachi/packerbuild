@@ -127,7 +127,7 @@ build {
   provisioner "shell-local" {
     inline_shebang = "/bin/bash -e"
     inline = [
-      "pipx inject python-env-name \"pywinrm\"",
+      "pipx inject packer-demo \"pywinrm\"",
     ]
   }
 
