@@ -103,7 +103,7 @@ source "azure-arm" "server_2019" {
   communicator                                     = "winrm"
   winrm_username = "Administrator"
   winrm_password = "SuperS3cr3t!!!!"
-  winrm_use_ssl                                    = false
+  winrm_use_ssl                                    = true
   winrm_insecure                                   = true
   winrm_timeout                                    = "3m"
   managed_image_name                               = "Managed-Image-Name"
