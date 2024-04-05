@@ -127,8 +127,7 @@ build {
   provisioner "powershell" {
     script = "./ConfigureRemotingForAnsible.ps1"
   }
-  provisioner "shell"
-  {
+  provisioner "shell" {
     inline = ["pip install pywinrm",
     "pip show pywinrm"]
   }
