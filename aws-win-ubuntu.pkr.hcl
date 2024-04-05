@@ -103,7 +103,7 @@ source "azure-arm" "server_2019" {
   communicator                                     = "winrm"
   winrm_username = "Administrator"
   winrm_password = "SuperS3cr3t!!!!"
-  winrm_use_ssl                                    = true
+  winrm_use_ssl                                    = false
   winrm_insecure                                   = true
   winrm_timeout                                    = "3m"
   managed_image_name                               = "Managed-Image-Name"
@@ -133,12 +133,10 @@ build {
   }
 
   provisioner "ansible" {
-    skip_version_check  = false
-    user                = "Administrator"
-    use_proxy           = false
-    playbook_file       = "win_playbook.yml"
+    playbook_file = "./win_playbook.yml"
+    user          = "Administrator"
     extra_arguments = [
-      "-e","ansible_winrm_transport=ntlm ansible_winrm_server_cert_validation=ignore"
-    ]
+      "-e","ansible_winrm_transport=ntlm",
+      "-e","ansible_winrm_server_cert_validation=ignore"
   }
 }
