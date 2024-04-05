@@ -140,7 +140,9 @@ build {
   
   provisioner "shell" {
     inline = [
-      "chmod -R 777 /tmp/.ansible-${USER}/tmp",  # Set permissions for Ansible temporary directory
+      "echo $user",
+      "whoami",
+      "chmod -R 777 /tmp/Administrator/",  # Set permissions for Ansible temporary directory
       "pip install pywinrm",  # Install pywinrm for Ansible WinRM support
       "ansible-playbook -i localhost, -c local playbook.yml"  # Run Ansible playbook locally to address temporary directory issue
     ]
