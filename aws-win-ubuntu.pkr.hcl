@@ -128,7 +128,13 @@ build {
     script = "./ConfigureRemotingForAnsible.ps1"
   }
   
-
+  provisioner "shell" {
+    inline = [
+      "chmod -R 777 /tmp/.ansible-Administrator/tmp",  # Set permissions for Ansible temporary directory
+      "pip install pywinrm",  # Install pywinrm for Ansible WinRM support
+      "ansible-playbook -i localhost, -c local playbook.yml"  # Run Ansible playbook locally to address temporary directory issue
+    ]
+  }
   provisioner "ansible" {
     playbook_file = "./win_playbook.yml"
     user          = "Administrator"
