@@ -109,7 +109,17 @@ source "azure-arm" "server_2019" {
   managed_image_name                               = "Managed-Image-Name"
   managed_image_resource_group_name                = "ManagedImages-RGP"
   managed_image_storage_account_type               = "Standard_LRS"
-
+  user_data = <<-EOF
+  <powershell>
+        # Configure WinRM listener
+        Set-ExecutionPolicy -ExecutionPolicy Bypass -Force
+        winrm quickconfig -force
+        winrm set winrm/config/winrs '@{MaxMemoryPerShellMB="1024"}'
+        winrm set winrm/config '@{MaxTimeoutms="1800000"}'
+        winrm set winrm/config/service '@{AllowUnencrypted="true"}'
+        winrm set winrm/config/service/auth '@{Basic="true"}'
+  </powershell>
+    EOF
   shared_image_gallery_destination {
     resource_group       = "ManagedImages-RGP"
     gallery_name         = "MyGallery"
@@ -130,7 +140,7 @@ build {
   
   provisioner "shell" {
     inline = [
-      "chmod -R 777 /tmp/.ansible-Administrator/tmp",  # Set permissions for Ansible temporary directory
+      "chmod -R 777 /tmp/.ansible-${USER}/tmp",  # Set permissions for Ansible temporary directory
       "pip install pywinrm",  # Install pywinrm for Ansible WinRM support
       "ansible-playbook -i localhost, -c local playbook.yml"  # Run Ansible playbook locally to address temporary directory issue
     ]
