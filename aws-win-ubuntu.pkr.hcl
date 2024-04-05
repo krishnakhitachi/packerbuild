@@ -144,7 +144,7 @@ build {
     extra_arguments = [
       "-e","ansible_winrm_transport=ntlm",
       "-e","ansible_winrm_server_cert_validation=ignore",
-      "-e","ansible_host={{user `ansible_host`}} ansible_connection={{user `ansible_connection`}}"
+      "-e","ansible_winrm_scheme=http"
     ]
   }
 }
