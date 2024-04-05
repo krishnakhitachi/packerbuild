@@ -127,10 +127,7 @@ build {
   provisioner "powershell" {
     script = "./ConfigureRemotingForAnsible.ps1"
   }
-  provisioner "shell" {
-    inline = ["pip install pywinrm",
-    "pip show pywinrm"]
-  }
+  
 
   provisioner "ansible" {
     playbook_file = "./win_playbook.yml"
@@ -138,5 +135,6 @@ build {
     extra_arguments = [
       "-e","ansible_winrm_transport=ntlm",
       "-e","ansible_winrm_server_cert_validation=ignore"
+    ]
   }
 }
