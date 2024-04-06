@@ -102,17 +102,6 @@ source "azure-arm" "server_2019" {
   winrm_password = "SuperS3cr3t!!!!"
   winrm_use_ssl                                    = true
   winrm_insecure                                   = true
-  user_data = <<-EOF
-  <powershell>
-        # Configure WinRM listener
-        Set-ExecutionPolicy -ExecutionPolicy Bypass -Force
-        winrm quickconfig -force
-        winrm set winrm/config/winrs '@{MaxMemoryPerShellMB="1024"}'
-        winrm set winrm/config '@{MaxTimeoutms="1800000"}'
-        winrm set winrm/config/service '@{AllowUnencrypted="true"}'
-        winrm set winrm/config/service/auth '@{Basic="true"}'
-  </powershell>
-    EOF
   shared_image_gallery_destination {
     resource_group       = "ManagedImages-RGP"
     gallery_name         = "MyGallery"
@@ -135,9 +124,7 @@ build {
     user          = "Administrator"
     playbook_file = "./win_playbook.yml"
     extra_arguments = [
-      "-e","ansible_winrm_transport=ntlm",
-      "-e","ansible_winrm_server_cert_validation=ignore",
-      "-e","ansible_port=5985"
+      "-e","ansible_winrm_transport=ntlm ansible_winrm_server_cert_validation=ignore ansible_port=5985"
     ]
   }
 }
