@@ -96,19 +96,12 @@ source "azure-arm" "server_2019" {
   vm_size                                          = "Standard_D2as_v5"
   os_disk_size_gb                                  = 30
   shared_gallery_image_version_exclude_from_latest = false
-  virtual_network_resource_group_name              = "VNET-Resource-Group"
-  virtual_network_name                             = "My-VNET"
-  virtual_network_subnet_name                      = "My-Subnet"
   private_virtual_network_with_public_ip           = false
   communicator                                     = "winrm"
   winrm_username = "Administrator"
   winrm_password = "SuperS3cr3t!!!!"
   winrm_use_ssl                                    = true
   winrm_insecure                                   = true
-  winrm_timeout                                    = "3m"
-  managed_image_name                               = "Managed-Image-Name"
-  managed_image_resource_group_name                = "ManagedImages-RGP"
-  managed_image_storage_account_type               = "Standard_LRS"
   user_data = <<-EOF
   <powershell>
         # Configure WinRM listener
@@ -144,7 +137,7 @@ build {
     extra_arguments = [
       "-e","ansible_winrm_transport=ntlm",
       "-e","ansible_winrm_server_cert_validation=ignore",
-      "-e","ansible_winrm_scheme=http ansible_port=5985"
+      "-e","ansible_port=5985"
     ]
   }
 }
