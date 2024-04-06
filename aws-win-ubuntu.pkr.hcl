@@ -128,7 +128,7 @@ build {
   provisioner "shell-local" {
     inline_shebang = "/bin/bash -e"
     inline = [
-      "./opt/pipx/venvs/ansible-core/bin/activate"
+      "./opt/pipx/venvs/ansible-core/bin/activate",
       "pip install pywinrm",
     ]
   }
