@@ -105,7 +105,7 @@ source "azure-arm" "server_2019" {
   winrm_use_ssl                                    = true
   winrm_insecure                                   = true
   winrm_timeout                                    = "3m"
-  winrm_username                                   = "Admin"
+  winrm_username                                   = "Administrator"
   managed_image_name                               = "Managed-Image-Name"
   managed_image_resource_group_name                = "ManagedImages-RGP"
   managed_image_storage_account_type               = "Standard_LRS"
@@ -140,7 +140,8 @@ build {
 
   provisioner "ansible" {
     skip_version_check  = false
-    user                = "Admin"
+    user                = "Administrator"
+    command = "virtualenv -p python3 venv"
     use_proxy           = false
     playbook_file       = "./win_playbook.yml"
     extra_arguments = [
