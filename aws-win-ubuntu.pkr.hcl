@@ -38,7 +38,6 @@ source "amazon-ebs" "windows" {
   winrm_use_ssl                                    = true
   winrm_insecure                                   = true
   winrm_timeout                                    = "3m"
-  winrm_username                                   = "Administrator"
   region        = "us-east-1"
   source_ami_filter {
     filters = {
