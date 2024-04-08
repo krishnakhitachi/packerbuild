@@ -196,17 +196,6 @@ build {
   provisioner "shell-local" {
     inline_shebang = "/bin/bash -e"
     inline = [
-      "pip install --upgrade virtualenv",
-      "pip install pywinrm",
-      "ansible --version",
-      "python --version",
-      "pip --version",
-      "pip list",
-      "pip install requests",
-      "pip install awx",
-      "pip install winping",
-      "pip list",
-      "ansible-galaxy collection list",
       ". /opt/pipx/venvs/ansible-core/bin/activate && /opt/pipx/venvs/ansible-core/bin/python -m pip install pywinrm",
     ]
   }
