@@ -1,7 +1,6 @@
 ---
 - name: Install Apache from an MSI 
-  hosts: default
-  become: true
+  hosts: all
  
   tasks:
     - name: Download the Apache installer
