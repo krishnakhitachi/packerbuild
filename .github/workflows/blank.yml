@@ -56,4 +56,7 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Packer Build - Branches
         if: "startsWith(github.ref, 'refs/heads/')"
-        run: packer build -only=learn-packer-windows3.amazon-ebs.winrm-example aws-win-ubuntu.pkr.hcl
+        run: |
+          export ANSIBLE_PYTHON_INTERPRETER=/usr/bin/python3  # Path to Python interpreter
+          packer build -only=learn-packer-windows3.amazon-ebs.winrm-example aws-win-ubuntu.pkr.hcl
+ 
