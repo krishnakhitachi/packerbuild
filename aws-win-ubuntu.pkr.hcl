@@ -132,6 +132,9 @@ build {
       "pip install --upgrade virtualenv",
       "pip install pywinrm",
       "ansible --version",
+      "pip list",
+      "pip install requests",
+      "pip list",
     ]
   }
 
