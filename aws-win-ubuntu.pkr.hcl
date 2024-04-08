@@ -203,6 +203,7 @@ build {
       "pip install requests",
       "pip install awx",
       "pip list",
+      "ansible-galaxy collection list",
     ]
   }
 
