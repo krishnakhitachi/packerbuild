@@ -129,7 +129,6 @@ build {
     inline_shebang = "/bin/bash -e"
     inline = [
       "pip install --upgrade virtualenv",
-      "virtualenv -p python3 venv",
       "pip install pywinrm",
     ]
   }
@@ -141,7 +140,6 @@ build {
   provisioner "ansible" {
     skip_version_check  = false
     user                = "Administrator"
-    command = "virtualenv -p python3 venv"
     use_proxy           = false
     playbook_file       = "./win_playbook.yml"
     extra_arguments = [
