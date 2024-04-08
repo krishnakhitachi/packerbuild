@@ -35,6 +35,10 @@ source "amazon-ebs" "windows" {
   ami_name      = "packer-windows-demo-${local.timestamp}"
   instance_type = "t2.micro"
   communicator  = "winrm"
+  winrm_use_ssl                                    = true
+  winrm_insecure                                   = true
+  winrm_timeout                                    = "3m"
+  winrm_username                                   = "Administrator"
   region        = "us-east-1"
   source_ami_filter {
     filters = {
@@ -130,7 +134,7 @@ build {
     inline = [
       "pip install --upgrade virtualenv",
       "pip install pywinrm",
-      "ansible --version | head -1 ; pip show ansible | head -2",
+      "ansible --version",
     ]
   }
 
