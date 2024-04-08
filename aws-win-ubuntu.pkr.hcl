@@ -199,6 +199,7 @@ build {
       "pip install --upgrade virtualenv",
       "pip install pywinrm",
       "ansible --version",
+      "python --version",
       "pip list",
       "pip install requests",
       "pip install awx",
