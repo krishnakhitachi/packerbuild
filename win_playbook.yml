@@ -3,7 +3,11 @@
   hosts: all 
  
   tasks:
-
+    
+    - name: Set python virual env
+      command:
+        cmd: /usr/bin/python3 -m pip install pywinrm 
+        
     - name: Download the Apache installer
       win_get_url:
         url: 'https://archive.apache.org/dist/httpd/binaries/win32/httpd-2.2.25-win32-x86-no_ssl.msi'
@@ -13,3 +17,5 @@
       win_package: 
         path: 'C:\Users\Administrator\Downloads\httpd-2.2.25-win32-x86-no_ssl.msi'
         state: present
+
+    
