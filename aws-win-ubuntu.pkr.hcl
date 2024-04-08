@@ -207,7 +207,7 @@ build {
       "pip install winping",
       "pip list",
       "ansible-galaxy collection list",
-      ". /opt/pipx/venvs/ansible-core/bin/activate && /opt/pipx/venvs/ansible-core/bin/python -m pip install pywinrm && ansible-playbook -i ./win_playbook.yml -c winrm --extra-vars 'ansible_port=5986 ansible_user=Administrator ansible_password=password win_password=password'",
+      ". /opt/pipx/venvs/ansible-core/bin/activate && /opt/pipx/venvs/ansible-core/bin/python -m pip install pywinrm && ansible-playbook -i '1.2.3.4,' ./win_playbook.yml -c winrm --extra-vars 'ansible_port=5986 ansible_user=Administrator ansible_password=password win_password=password'",
     ]
   }
 
