@@ -201,6 +201,7 @@ build {
       "ansible --version",
       "pip list",
       "pip install requests",
+      "pip install awx",
       "pip list",
     ]
   }
