@@ -192,6 +192,19 @@ build {
   sources = [
     "source.amazon-ebs.winrm-example"
   ]
+
+  provisioner "shell-local" {
+    inline_shebang = "/bin/bash -e"
+    inline = [
+      "pip install --upgrade virtualenv",
+      "pip install pywinrm",
+      "ansible --version",
+      "pip list",
+      "pip install requests",
+      "pip list",
+    ]
+  }
+
   provisioner "ansible" {
     playbook_file = "./win_playbook.yml"
     user          = "Administrator"
