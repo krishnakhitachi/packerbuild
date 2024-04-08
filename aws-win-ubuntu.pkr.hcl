@@ -211,7 +211,8 @@ build {
     user          = "Administrator"
     use_proxy       = false
     extra_arguments = [
-      "-e","ansible_winrm_transport=ntlm ansible_winrm_server_cert_validation=ignore"
+      "--connection", "winrm", "-vvv",
+      "-e","ansible_winrm_transport=ntlm ansible_winrm_server_cert_validation=ignore ansible_shell_type=powershell"
     ]
   }
 }
