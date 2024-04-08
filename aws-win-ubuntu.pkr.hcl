@@ -130,6 +130,7 @@ build {
     inline = [
       "pip install --upgrade virtualenv",
       "pip install pywinrm",
+      "ansible --version | head -1 ; pip show ansible | head -2",
     ]
   }
 
