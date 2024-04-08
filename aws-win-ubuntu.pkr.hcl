@@ -202,6 +202,7 @@ build {
       "pip list",
       "pip install requests",
       "pip install awx",
+      "pip install winping",
       "pip list",
       "ansible-galaxy collection list",
     ]
