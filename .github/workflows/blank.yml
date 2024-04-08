@@ -37,7 +37,7 @@ jobs:
           python-version: '3.x'
       
       - name: Install pywinrm
-        run: pip install pywinrm
+        run: python -m pip install pywinrm
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
