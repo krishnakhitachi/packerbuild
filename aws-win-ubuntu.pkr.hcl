@@ -200,12 +200,14 @@ build {
       "pip install pywinrm",
       "ansible --version",
       "python --version",
+      "pip --version",
       "pip list",
       "pip install requests",
       "pip install awx",
       "pip install winping",
       "pip list",
       "ansible-galaxy collection list",
+      "/opt/pipx/venvs/ansible-core/bin/activate",
     ]
   }
 
