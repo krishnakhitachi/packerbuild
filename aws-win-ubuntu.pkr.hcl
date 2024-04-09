@@ -31,6 +31,16 @@ source "amazon-ebs" "ubuntu" {
   ssh_username = "ubuntu"
 }
 
+build {
+  name = "learn-packer"
+  sources = [
+    "source.amazon-ebs.ubuntu"
+  ]
+  provisioner "ansible" {
+    playbook_file = "./playbook.yml"
+    user          = "ubuntu"
+  }
+}
 
 # This example uses a amazon-ami data source rather than a specific AMI.
 # this allows us to use the same filter regardless of what region we're in,
